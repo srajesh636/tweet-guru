@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>PyFlask Learning</title>
+
+      <link href="{{ url_for('static',filename='bootstrap.min.css' )}}" rel="stylesheet">
+
+    <link href="{{ url_for('static',filename='clean-blog.min.css')}} " rel="stylesheet">
+
+    <link href="{{ url_for('static' ,filename='font-awesome.min.css')}}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <style>
+
+                #loader {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            z-index: 1;
+            width: 150px;
+            height: 150px;
+            margin: -75px 0 0 -75px;
+            border: 16px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 16px solid #3498db;
+            width: 120px;
+            height: 120px;
+            -webkit-animation: spin 2s linear infinite;
+            animation: spin 2s linear infinite;
+            }
+
+            @-webkit-keyframes spin {
+            0% { -webkit-transform: rotate(0deg); }
+            100% { -webkit-transform: rotate(360deg); }
+            }
+
+            @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+            }
+
+            /* Add animation to "page content" */
+            .animate-bottom {
+            position: relative;
+            -webkit-animation-name: animatebottom;
+            -webkit-animation-duration: 1s;
+            animation-name: animatebottom;
+            animation-duration: 1s
+            }
+
+            @-webkit-keyframes animatebottom {
+            from { bottom:-100px; opacity:0 }
+            to { bottom:0px; opacity:1 }
+            }
+
+            @keyframes animatebottom {
+            from{ bottom:-100px; opacity:0 }
+            to{ bottom:0; opacity:1 }
+            }
+
+            #myDiv {
+            display: none;
+            text-align: center;
+            }
+
+    </style>
+
+
+  </head>
+
+  <body onload="myFunction()" style="margin:0;">
+
+<div id="loader"></div>
+  <!-- Navigation -->
+
+  <div style="display:none;" id="myDiv" class="animate-bottom">
+
+
+
+     <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+      <div class="container">
+        <a class="navbar-brand" href="{{url_for('index')}}">PyFlask</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          Menu
+          <i class="fa fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('index') }}">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('about') }}">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('post') }}">Tweet Guru</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('contact') }}">Contact</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="masthead" style="background-image: url('{{ url_for('static',filename='post-bg.jpg')}}')">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+            <div class="post-heading">
+              <h1>Man Cannot Live Without Twitter
+                  </h1>
+              <h2 class="subheading">Lets See The Public Opinion Through Twitter</h2>
+              <span class="meta">Made by
+                <a href="#">Python Flask</a>
+                on February 17, 2018</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <br>
+
+
+
+
+
+      <div class="container-fluid">
+        <div class="jumbotron jumbotron-fluid">
+      <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <form class="form-inline " method="POST" align='text-center' style='margin-left:180px' action="{{ url_for('tweets') }}">
+
+      <label class="sr-only" for="inlineFormInputGroup">Username</label>
+      <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+
+        <input type="text" class="form-control"  name="username" placeholder="Search">
+
+
+      <label class="sr-only" for="inlineFormInput">Name</label>
+      <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0"  name="password" placeholder="Count">
+
+
+      <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+
+    </div>
+
+      <br>
+
+      {% if usr %}
+      <ul class="list-group">
+
+        <li class="list-group-item"> <h2 class='subheading'>You searched for - {{ usr }} </h2><span class="badge badge-pill badge-info pull-right" > {{ p }} </span></li>
+
+
+      </ul>
+        {% endif %}
+
+      </div>
+        </div>
+      </div>
+
+
+
+
+
+
+
+
+    <br>
+
+      <br>
+      {% if po %}
+        <div class="container-fluid">
+          <div class="jumbotron jumbotron-fluid">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+
+          <ul class="list-group">
+
+
+            <li class="list-group-item"> Positive Tweets <span class="badge badge-pill badge-success pull-right" > {{ po }} </span></li>
+            <li class="list-group-item"> Negative Tweets <span class="badge badge-pill badge-danger pull-right"> {{ ne }} </span></li>
+            <li class="list-group-item"> Neutral Tweets  <span class="badge badge-pill badge-info pull-right"> {{ n }} </span></li>
+             <li class="list-group-item"> Total  Tweets  <span class="badge badge-pill badge-primary pull-right"> {{ p }} </span></li>
+
+
+
+          </ul>
+                </div>
+             </div>
+          </div>
+    </div>
+    {% endif %}
+      <br>
+
+      {%   if tw %}
+        <div class="container-fluid">
+          <div class="jumbotron jumbotron-fluid">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+
+          <ul class="list-group">
+              {% for i in range(0,10)%}
+              <li class=list-group-item><span class="badge badge-pill badge-warning pull-left" >{{ i+1 }}</span>  &nbsp  <i class="fa fa-twitter" style="font-size:42px;color:blue"></i> {{ lu[i] }}  :
+     {{tw[i]}}</li>
+                {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+    </div>
+    {% endif %}
+
+    <br>
+    {%   if d %}
+      <div class="container-fluid">
+        <div class="jumbotron jumbotron-fluid">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+
+        <ul class="list-group">
+
+            {% for i in d %}
+
+
+            <li class=list-group-item><span class="badge badge-pill badge-warning pull-left" ></span>  &nbsp  <i class="fa fa-twitter" style="font-size:42px;color:blue"></i>
+   {{ i }}</li>
+              {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+  </div>
+  {% endif %}
+    <!-- Post Content -->
+
+    <hr>
+
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+
+            <p class="copyright text-muted">Copyright &copy; Your Website 2018</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+
+  </div>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="{{ url_for('static',filename='jquery.min.js')}}"></script>
+    <script src="{{ url_for('static',filename='bootstrap.bundle.min.js')}}"></script>
+    <script src="{{ url_for('static',filename='clean-blog.min.js')}}"></script>
+    <script>
+        var myVar;
+
+        function myFunction() {
+          myVar = setTimeout(showPage, 1000);
+        }
+
+        function showPage() {
+        document.getElementById("loader").style.display = "none";
+        document.getElementById("myDiv").style.display = "block";
+        }
+      </script>
+
+
+
+
+
+    </script>
+
+
+    </body>
+
+</html>
