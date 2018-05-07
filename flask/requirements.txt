@@ -1,0 +1,5 @@
+flask
+tweepy
+numpy
+pandas
+textblob

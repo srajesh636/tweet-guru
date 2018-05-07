@@ -69,17 +69,41 @@
     </header>
 
     <!-- Main Content -->
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-8 col-md-10 mx-auto">
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe nostrum ullam eveniet pariatur voluptates odit, fuga atque ea nobis sit soluta odio, adipisci quas excepturi maxime quae totam ducimus consectetur?</p>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius praesentium recusandae illo eaque architecto error, repellendus iusto reprehenderit, doloribus, minus sunt. Numquam at quae voluptatum in officia voluptas voluptatibus, minus!</p>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut consequuntur magnam, excepturi aliquid ex itaque esse est vero natus quae optio aperiam soluta voluptatibus corporis atque iste neque sit tempora!</p>
-        </div>
-      </div>
-    </div>
+    <div class="container-fluid">
+      <div class="jumbotron jumbotron-fluid">
+    <div class="row">
+    <div class="col-lg-8 col-md-10 mx-auto">
+      <form class="form-inline " method="POST" align='text-center' style='margin-left:180px' action="{{ url_for('speech_py') }}">
+
+    <label class="sr-only" for="inlineFormInputGroup">Type Something !</label>
+    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+
+      <input type="text" class="form-control"  name="text" placeholder="Something !">
+
+
+
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+  </div>
+
+    {% if q %}
+
+    <p> {{ q }} </p>
+
+    {% endif %}
 
     <hr>
+
+
+    <audio autoplay>
+
+    <source src="hello.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+  </audio>
+
+
 
     <!-- Footer -->
     <footer>

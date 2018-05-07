@@ -9,6 +9,14 @@
     <meta name="author" content="">
 
     <title>PyFlask Learning</title>
+    <!-- adding libraries of material css-->
+
+
+
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
       <link href="{{ url_for('static',filename='bootstrap.min.css' )}}" rel="stylesheet">
 
@@ -21,7 +29,10 @@
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
     <style>
 
-                #loader {
+
+    /* code for loader on page load*/
+
+          #loader {
             position: absolute;
             left: 50%;
             top: 50%;
@@ -67,27 +78,80 @@
             to{ bottom:0; opacity:1 }
             }
 
-            #myDiv {
-            display: none;
-            text-align: center;
-            }
+
+
+    /* code for playing the video as background*/
+
+
+            #myVideo {
+              position: fixed;
+              right: 0;
+              bottom: 0;
+              min-width: 100%;
+              min-height: 100%;
+
+                }
+
+  /* code for making the button circle in the homepage*/
+
+          .btn-circle {
+              width: 80px;
+              height: 80px;
+              padding: 6px 0px;
+              border-radius: 40px;
+              text-align: center;
+              font-size: 30px;
+              line-height: 1.42857;
+          }
+
+
+  /* code to create a depth feeling behinfd the content*/
+        #shadow-depth{
+           -webkit-box-shadow: 0 16px 28px 0 rgba(0, 0, 0, 0.22), 0 25px 55px 0 rgba(0, 0, 0, 0.21);
+          -moz-box-shadow: 0 16px 28px 0 rgba(0, 0, 0, 0.22), 0 25px 55px 0 rgba(0, 0, 0, 0.21);
+          box-shadow: 0 16px 25px 0 #dc354561, 0 25px 40px 0 rgba(0, 0, 0, 0.21);
+          }
+
+
 
     </style>
+
+<!--code for jquery animations-->
+    <script>
+
+      $(document).ready(function(){
+
+                $("body").css("overflow","hidden");
+                $("form").hide();
+                $("#trigger").click(function(){
+                        $("body").css("overflow","visible");
+                        $("form").show();
+
+                 });
+
+      });
+    </script>
+
+
+
 
 
   </head>
 
-  <body onload="myFunction()" style="margin:0;">
+  <body onload="myFunction()" style="margin:0;" scroll="no">
 
-<div id="loader"></div>
+  <!--div block for loader-->
+    <div id="loader"></div>
+
+
   <!-- Navigation -->
 
   <div style="display:none;" id="myDiv" class="animate-bottom">
 
 
-
      <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
       <div class="container">
+
         <a class="navbar-brand" href="{{url_for('index')}}">PyFlask</a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           Menu
@@ -98,6 +162,7 @@
             <li class="nav-item">
               <a class="nav-link" href="{{ url_for('index') }}">Home</a>
             </li>
+            <!--
             <li class="nav-item">
               <a class="nav-link" href="{{ url_for('about') }}">About</a>
             </li>
@@ -107,50 +172,61 @@
             <li class="nav-item">
               <a class="nav-link" href="{{ url_for('contact') }}">Contact</a>
             </li>
+          -->
           </ul>
         </div>
       </div>
     </nav>
+    <video autoplay muted loop id="myVideo">
+        <source src="{{url_for('static',filename='bg2.mp4')}}" type="video/mp4">
+    </video>
 
     <!-- Page Header -->
-    <header class="masthead" style="background-image: url('{{ url_for('static',filename='post-bg.jpg')}}')">
+    <header class="masthead" style="background-color:#868e9600; height:820px;">
       <div class="overlay"></div>
       <div class="container">
         <div class="row">
           <div class="col-lg-8 col-md-10 mx-auto">
             <div class="post-heading">
-              <h1>Man Cannot Live Without Twitter
-                  </h1>
-              <h2 class="subheading">Lets See The Public Opinion Through Twitter</h2>
+
+
+
+              <h1>Tweet - Guru
+              </h1>
+              <br>
+              <h5 class="subheading">Lets See The Public Opinion Through Twitter</h5>
               <span class="meta">Made by
                 <a href="#">Python Flask</a>
                 on February 17, 2018</span>
+
+                <br>
+                <br>
+                <br>
+
+                <button  id="trigger" class="btn btn-success up">Explore</button>
+
+
             </div>
           </div>
         </div>
       </div>
     </header>
 
-    <br>
-
-
-
-
-
-      <div class="container-fluid">
+      <div class="container-fluid text-center">
         <div class="jumbotron jumbotron-fluid">
       <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
+
         <form class="form-inline " method="POST" align='text-center' style='margin-left:180px' action="{{ url_for('tweets') }}">
 
-      <label class="sr-only" for="inlineFormInputGroup">Username</label>
+      <label class="sr-only" for="inlineFormInputGroup">Tweet</label>
       <div class="input-group mb-2 mr-sm-2 mb-sm-0">
 
-        <input type="text" class="form-control"  name="username" placeholder="Search">
+        <input type="text" class="form-control"  name="tweet_item" placeholder="Search" required>
 
 
-      <label class="sr-only" for="inlineFormInput">Name</label>
-      <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0"  name="password" placeholder="Count">
+      <label class="sr-only" for="inlineFormInput">Count</label>
+      <input type="number" class="form-control mb-2 mr-sm-2 mb-sm-0"  name="tweet_count" placeholder="Count" required>
 
 
       <button type="submit" class="btn btn-primary">Submit</button>
@@ -160,37 +236,60 @@
 
       <br>
 
-      {% if usr %}
-      <ul class="list-group">
+      <br>
+      <br>
 
-        <li class="list-group-item"> <h2 class='subheading'>You searched for - {{ usr }} </h2><span class="badge badge-pill badge-info pull-right" > {{ p }} </span></li>
+  <!--code for You Searched-->
+      {% if keyword %}
+      <ul class="list-group" id="search">
+
+        <li class="list-group-item"> <h2 class='subheading'>You searched for - {{ keyword }} </h2><span class="badge badge-pill badge-info pull-right" > {{ p }} </span></li>
 
 
       </ul>
         {% endif %}
 
       </div>
-        </div>
+    </div>
       </div>
 
 
+<!--heading - Report-->
+
+    <div class="container-fluid text-center">
+      <div class="jumbotron-fluid">
+        <div class="row">
+          <div class="col-lg-3 col-md-5 mx-auto">
+        {% if keyword %}
+
+      <ul class="list-group" id="search">
+
+        <li class="list-group-item" data-href="report"> <h2 class='subheading'>Report </h2></li>
+
+
+      </ul>
+  {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
 
 
 
 
 
 
-    <br>
+
 
       <br>
       {% if po %}
-        <div class="container-fluid">
+
+        <div class="container-fluid"  >
           <div class="jumbotron jumbotron-fluid">
       <div class="row">
-        <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="col-lg-5 col-md-7 mx-auto" id="shadow-depth">
 
-          <ul class="list-group">
-
+          <ul class="list-group" >
 
             <li class="list-group-item"> Positive Tweets <span class="badge badge-pill badge-success pull-right" > {{ po }} </span></li>
             <li class="list-group-item"> Negative Tweets <span class="badge badge-pill badge-danger pull-right"> {{ ne }} </span></li>
@@ -204,19 +303,54 @@
              </div>
           </div>
     </div>
+
     {% endif %}
       <br>
+      <!--heading - Report-->
+
+          <div class="container-fluid text-center">
+            <div class="jumbotron-fluid">
+              <div class="row">
+                <div class="col-lg-3 col-md-5 mx-auto">
+              {% if keyword %}
+
+            <ul class="list-group" id="search">
+
+              <li class="list-group-item"> <h2 class='subheading'>Latest </h2></li>
+
+
+            </ul>
+        {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
 
       {%   if tw %}
-        <div class="container-fluid">
+        <div class="container-fluid" >
           <div class="jumbotron jumbotron-fluid">
       <div class="row">
-        <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="col-lg-8 col-md-10 mx-auto" id="shadow-depth">
 
           <ul class="list-group">
               {% for i in range(0,10)%}
+
+
               <li class=list-group-item><span class="badge badge-pill badge-warning pull-left" >{{ i+1 }}</span>  &nbsp  <i class="fa fa-twitter" style="font-size:42px;color:blue"></i> {{ lu[i] }}  :
      {{tw[i]}}</li>
+
                 {% endfor %}
           </ul>
         </div>
@@ -226,11 +360,43 @@
     {% endif %}
 
     <br>
+
+    <!--heading - Report-->
+
+        <div class="container-fluid text-center">
+          <div class="jumbotron-fluid">
+            <div class="row">
+              <div class="col-lg-3 col-md-5 mx-auto">
+            {% if keyword %}
+
+          <ul class="list-group" id="search">
+
+            <li class="list-group-item"> <h2 class='subheading'>Most Retweet </h2></li>
+
+
+          </ul>
+      {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+
     {%   if d %}
-      <div class="container-fluid">
+      <div class="container-fluid" >
         <div class="jumbotron jumbotron-fluid">
     <div class="row">
-      <div class="col-lg-8 col-md-10 mx-auto">
+      <div class="col-lg-8 col-md-10 mx-auto" id="shadow-depth">
 
         <ul class="list-group">
 
@@ -239,8 +405,11 @@
 
             <li class=list-group-item><span class="badge badge-pill badge-warning pull-left" ></span>  &nbsp  <i class="fa fa-twitter" style="font-size:42px;color:blue"></i>
    {{ i }}</li>
+
               {% endfor %}
         </ul>
+
+
       </div>
     </div>
   </div>
@@ -257,11 +426,13 @@
         <div class="row">
           <div class="col-lg-8 col-md-10 mx-auto">
 
-            <p class="copyright text-muted">Copyright &copy; Your Website 2018</p>
-          </div>
+              </div>
         </div>
       </div>
     </footer>
+
+
+
 
 
   </div>
@@ -270,11 +441,13 @@
     <script src="{{ url_for('static',filename='jquery.min.js')}}"></script>
     <script src="{{ url_for('static',filename='bootstrap.bundle.min.js')}}"></script>
     <script src="{{ url_for('static',filename='clean-blog.min.js')}}"></script>
+
+    <!--code for loader-->
     <script>
         var myVar;
 
         function myFunction() {
-          myVar = setTimeout(showPage, 1000);
+          myVar = setTimeout(showPage, 500);
         }
 
         function showPage() {
@@ -283,11 +456,31 @@
         }
       </script>
 
+      <!-- code for scroll movement-->
+    <script>
+
+
+
+$(document).ready(function() {
+$(".up").click(function() {
+     $('html, body').animate({
+         scrollTop: $(".down").offset().top
+     }, 1000);
+ });
+});
+
+</script>
 
 
 
 
-    </script>
+
+
+
+
+
+
+
 
 
     </body>
