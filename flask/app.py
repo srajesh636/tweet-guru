@@ -5,6 +5,7 @@ from os import system
 import re
 import os
 from tweets_service import get_tweets
+from  unidecode import unidecode
 
 
 
@@ -53,8 +54,9 @@ def tweets():
         list_ids.append(i.id)
 
         tweet=i.text
+        tweet=unidecode(tweet)
         cleaned_tweet=clean(tweet)
-        dict[i.retweet_count]=cleaned_tweet
+        dict[i.retweet_count]=clean(cleaned_tweet)
 
 
 
@@ -82,9 +84,8 @@ def tweets():
 def clean( tweet ):
     some=re.sub(r'https\S+','',tweet)
     some=re.sub(r'RT\s@\S+','',some)
-    some = some.replace('\n', '')
-    some=some.replace('#','')
-    some=some.replace('\xa0',' ')
+    some=some.replace('\n', '')
+
 
 
 
